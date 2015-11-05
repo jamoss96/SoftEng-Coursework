@@ -1,2 +1,3 @@
 Roles-
 James Kelly - GitMaster, Chief Programmer
+Sanjay Thapa - Chief Programmer, Bug Tester
