@@ -7,3 +7,13 @@ Sanjay Thapa - Chief Programmer, Bug Tester
 Information for the presentation- 1st Presentation 2nd Dec
 Target market - University students
 
+The Deliverables:
+
+- overview of the project concept target market and platform (Dan) and product overview and technologies (Sanjay)
+
+- programming languages chosen - James and bryan
+
+- Table of responsibilities - Nicolas
+
+- Diagrams (meet up)
+
