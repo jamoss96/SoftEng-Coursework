@@ -23,5 +23,8 @@ For our programming language we have chosen to use the java programming language
 all other programming are that it has excellent cross platform capabilities, you will no have to reprogram you program for 
 each OS, It also has vast amounts of 3rd party libraries as well as documentation which 
 both make life as the programmer a lot easier. 
+
+File/Database Systems Chosen - 
+For our file/database system we have chosen to use oracle database. The reasons for this are that with us using java to make our program it makes it really easy to integrate our database data into our java program and then do stuff with data which wouldn't be as easy if we used other systems.
   
 
