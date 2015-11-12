@@ -29,4 +29,8 @@ For our file/database system we have chosen to use oracle database. The reasons 
 our program it makes it really easy to integrate our database data into our java program and then do stuff with data which 
 wouldn't be as easy if we used other systems.
   
-
+- Graphic System ( SWING ) - BRY BRY
+To ensure that the chart rendering software functions across all different type of platforms and operating system, we have decided to use “SWING” graphic system.
+Unlike AWT, SWING is a GUI system that utilize AWT and produce images in the form of buttons, textboxes, labels and such that responds to events like mouse clicking, data entry, while AWT uses the operating system native GUI toolkit for its functionality.
+Due to this, AWT programs in one machine might not look and function the same on a different machine unless heavy effort is put into making AWT programs work consistently across platforms. 
+Even though SWING may take up slightly more memory space compared to AWT, we ultimately want a graphic system that all the team members have had experience using and can function consistently across platforms, saving team member’s extra precious time and effort needed to debug the inconsistencies, keeping in track with already planned schedule.
