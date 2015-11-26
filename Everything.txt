@@ -22,7 +22,7 @@ The Deliverables:
 
 -Programming Languages Chosen -
 For our programming language we have chosen to use the java programming language. The reasons why we chose to use java over 
-all other programming are that it has excellent cross platform capabilities, you will no have to reprogram you program for 
+all other programming are that it has excellent cross platform capabilities, you will not have to reprogram your program for 
 each OS, It also has vast amounts of 3rd party libraries as well as documentation which 
 both make life as the programmer a lot easier. 
 
