@@ -42,3 +42,6 @@ put into making AWT programs work consistently across platforms.
 Even though SWING may take up slightly more memory space compared to AWT, we ultimately want a graphic system that all the
 team members have had experience using and can function consistently across platforms, saving team member’s extra precious
 time and effort needed to debug the inconsistencies, keeping in track with already planned schedule.
+
+
+For our graphics system we have chosen to use a combination of swing, AWT and java 2d to create Graphical user inerface's(GUI's) and graphs. The GUI side of our program, where our users will enter the information to be put onto their graphs, will be created using swing. Swing is an extension of the Abstract Window Toolkit(AWT) which allow us to create GUI's which are independant of a specific operation systems windowing system meaning they will look the same for every operating system. For to make the graphs we will be using the Java 2D API. The Java 2D API provides 2D graphics capabilities for java programs through extensions to AWT. Throught the combination of swing and Java 2D we can easily create windows and using the window
