@@ -12,6 +12,45 @@ Target market - University students
 The Deliverables:
 
 - overview of the project concept target market and platform (Dan) and product overview and technologies (Sanjay)
+Target Market
+
+In terms of the target market for the concept, the main purpose of the program is to fill a gap in the market for students. The product aims to create three different charts; the PERT, GANT and WBT charts. Therefore the target market for this particular product is students in any year of study, but particularly useful for the latter years of study who use these charts for analysis of work.
+
+Platform
+
+In terms of the platform on which this product will be compatible with, the initial plans is to make this compatible for just PC. This is due to the fact that students will be doing major projects on their PC’s and it helps their ease of access to the product. There is room to facilitate compatibility with mobiles and tablets, however at this stage it is important to make sure it fully works with PC before trying to expand to mobile devices.
+
+Product overview
+
+-	Will be embedded in GUI for better usability.
+-	Will use Java language and Oracle for database as it will be easier to integrate both of them.
+-	Will run on any platform where Java runtime is available (JVM).
+-	Provides wide range of services as it lets you design WBT, PERT chart, Gantt chart as well as table of prerequisites.
+-	Helps to keep track of designs, capture information and produce reports.
+-	Has the ability to re-plan or reschedule projects in case of any sudden changes (unexpected scenario).
+-	Will focus mainly for university students, however few others business firms as well as college students can use this software to a certain degree (extent).
+-	Low cost.
+
+Technologies
+1.	Microsoft Project
+-	Suite of tools for providing efficient project and portfolio management.
+-	Used for creating projects, track tasks and report results.
+-	Includes project work and project teams, schedules and finances.
+-	Help users to set realistic goals for project team and customers by creating schedules, tracking progress, distributing resources, analysing workloads and managing budgets.
+
+2.	Gantt Project 
+-	is a desktop software
+-	free project scheduling and management application for Windows, OSX and Linux
+-	Written in Java
+-	Easy to use
+-	No licence fee
+
+3.	Mind Genius
+-	A software tool that will provide an effective and efficient way to capture, visualise and use the information within your business.
+-	Planning strategies, projects, events, tasks & workload.
+-	Rapidly gather project requirements, risks, constraints & dependencies.
+-	Capture of ideas, information and knowledge to make sure that your project gets the best possible start.
+
 
 - programming languages chosen - James and bryan
 
