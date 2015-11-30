@@ -21,27 +21,30 @@ The Deliverables:
 
 
 -Programming Languages Chosen -
-For our programming language we have chosen to use the java programming language. The reasons why we chose to use java over 
-all other programming are that it has excellent cross platform capabilities, you will not have to reprogram your program for 
-each OS, It also has vast amounts of 3rd party libraries as well as documentation which 
-both make life as the programmer a lot easier. 
+For our programming language we have chosen to use the java programming language. The reasons why we chose to use java
+over all other programming are that it has excellent cross platform capabilities, you will not have to reprogram your 
+program for each OS, It also has vast amounts of 3rd party libraries as well as documentation which 
+both make life as the programmer a lot easier.
 
 File/Database Systems Chosen - 
-For our file/database system we have chosen to use oracle database. The reasons for this are that with us using java to make 
-our program it makes it really easy to integrate our database data into our java program and then do stuff with data which 
-wouldn't be as easy if we used other systems.
+For our file/database system we have chosen to use oracle database. The reasons for this are that with us using java 
+to make our program it makes it really easy to integrate our database data into our java program and then do stuff 
+with data which wouldn't be as easy if we used other systems.
   
 - Graphic System ( SWING ) - BRY BRY
-To ensure that the chart rendering software functions across all different type of platforms and operating system, we have
-decided to use “SWING” graphic system.
-Unlike AWT, SWING is a GUI system that utilize AWT and produce images in the form of buttons, textboxes, labels and such that
-responds to events like mouse clicking, data entry, while AWT uses the operating system native GUI toolkit for its 
-functionality.
-Due to this, AWT programs in one machine might not look and function the same on a different machine unless heavy effort is
-put into making AWT programs work consistently across platforms. 
-Even though SWING may take up slightly more memory space compared to AWT, we ultimately want a graphic system that all the
-team members have had experience using and can function consistently across platforms, saving team member’s extra precious
-time and effort needed to debug the inconsistencies, keeping in track with already planned schedule.
+To ensure that the chart rendering software functions across all different type of platforms and operating system, we 
+have decided to use “SWING” graphic system. Unlike AWT, SWING is a GUI system that utilize AWT and produce images in 
+the form of buttons, textboxes, labels and such that responds to events like mouse clicking, data entry, while AWT uses the operating system native GUI toolkit for its 
+functionality.Due to this, AWT programs in one machine might not look and function the same on a different machine 
+unless heavy effort is. put into making AWT programs work consistently across platforms. 
+Even though SWING may take up slightly more memory space compared to AWT, we ultimately want a graphic system that all
+the team members have had experience using and can function consistently across platforms, saving team member’s extra 
+precious time and effort needed to debug the inconsistencies, keeping in track with already planned schedule.
 
-
-For our graphics system we have chosen to use a combination of swing, AWT and java 2d to create Graphical user inerface's(GUI's) and graphs. The GUI side of our program, where our users will enter the information to be put onto their graphs, will be created using swing. Swing is an extension of the Abstract Window Toolkit(AWT) which allow us to create GUI's which are independant of a specific operation systems windowing system meaning they will look the same for every operating system. For to make the graphs we will be using the Java 2D API. The Java 2D API provides 2D graphics capabilities for java programs through extensions to AWT. Throught the combination of swing and Java 2D we can easily create windows and using the window
+For our graphics system we have chosen to use a combination of swing, AWT and java 2d to create Graphical user 
+inerface's(GUI's) and graphs. The GUI side of our program, where our users will enter the information to be put onto 
+their graphs, will be created using swing. Swing is an extension of the Abstract Window Toolkit(AWT) which allow us to
+create GUI's which are independant of a specific operation systems windowing system meaning they will look the same 
+for every operating system. For to make the graphs we will be using the Java 2D API. The Java 2D API provides 2D 
+graphics capabilities for java programs through extensions to AWT. Throught the combination of swing and Java 2D we 
+can easily create windows and using the window
