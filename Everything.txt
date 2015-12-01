@@ -12,13 +12,15 @@ Target market - University students
 The Deliverables:
 
 - overview of the project concept target market and platform (Dan) and product overview and technologies (Sanjay)
+
 Target Market
 
-In terms of the target market for the concept, the main purpose of the program is to fill a gap in the market for students. The product aims to create three different charts; the PERT, GANT and WBT charts. Therefore the target market for this particular product is students in any year of study, but particularly useful for the latter years of study who use these charts for analysis of work.
+In terms of the target market for the concept, the main purpose of the program is to fill a gap in the market for students. The product aims to create three different charts; the PERT, GANT and WBT charts from common data from a database. The pivotal part of this software is that it must avoid the main deficiencies when it comes to software design; expensive, non-ubiquitous, does not support the planning of real-world projects (main purpose), and is not supporting all of the charts. Furthermore, the product should be of high enough quality that it can be used by final-year university students, therefore the target market for this particular product is students in any year of study, but particularly useful for the latter years of study who use these charts for analysis of work in their projects.
 
 Platform
 
-In terms of the platform on which this product will be compatible with, the initial plans is to make this compatible for just PC. This is due to the fact that students will be doing major projects on their PC’s and it helps their ease of access to the product. There is room to facilitate compatibility with mobiles and tablets, however at this stage it is important to make sure it fully works with PC before trying to expand to mobile devices.
+In terms of the platform on which this product will be compatible with, the initial plans is to make this compatible for just PC and Mac. This is due to the fact that students will be doing major projects on their desktops and it helps their ease of access to the product if they can have it readily available on there. There is room to facilitate compatibility with mobiles and tablets, however at this stage it is important to make sure it fully works with PC and Mac before trying to expand to mobile devices.                
+
 
 Product overview
 
