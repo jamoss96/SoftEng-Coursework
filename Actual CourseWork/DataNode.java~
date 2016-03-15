@@ -1,4 +1,3 @@
-package dragdraw;
 import java.util.ArrayList;
 
 public class DataNode{
@@ -9,8 +8,8 @@ public class DataNode{
   private int pertLateStart;
   private int pertLateFinish;
   private int pertSlack;
-  private ArrayList<Node> parents;
-  private ArrayList<Node> children;
+  private ArrayList<DataNode> parents;
+  private ArrayList<DataNode> children;
   private int monthStart;
   private int monthFinish;
   public int x;

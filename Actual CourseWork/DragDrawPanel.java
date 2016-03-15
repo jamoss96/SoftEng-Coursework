@@ -45,18 +45,25 @@ public class DragDrawPanel extends JPanel implements MouseListener, ActionListen
     public Dimension size;
     public ArrayList<DataNode> nodes;
     private DataNode ken;
+    private DataNode ken2;
+    public NewJFrame infoFrame;
+    private int created;
+    private int wbtParentnum;
+    private int tempwbtParent;
     
     public DragDrawPanel(Dimension screenSize){
         Timer time = new Timer(5, this);
         time.start();
         nodes = new ArrayList<DataNode>();
-        ken = new DataNode(560, 300, "Dave");
+        ken = new DataNode(560, 300, "Dave", false);
+        ken2 = new DataNode(560, 300, "Ken", true);
         nodes.add(ken);
+        nodes.add(ken2);
         System.out.println(nodes);
         paintImage = new BufferedImage(screenSize.width, screenSize.height, BufferedImage.TYPE_3BYTE_BGR);
         size = screenSize;
         clear();
-        
+        infoFrame = new NewJFrame(nodes);
         
         
     }
@@ -75,14 +82,47 @@ public class DragDrawPanel extends JPanel implements MouseListener, ActionListen
         
         oldx = xpos;
         oldy = ypos;
+        
         for(DataNode node:nodes){
-          g.drawRect(node.x, node.y, 150, 50);
+          g.drawRect(node.x, node.y, 100, 25);
           g.drawString(node.name, node.x+25, node.y+25);
       }
-
+       getwbtParent();
+        System.out.println(wbtParentnum);
+        
+       
+        tempwbtParent = wbtParentnum;
+        
+         for(DataNode node:nodes){
+           if (node.wbtParent) {
+           System.out.println("wbtPrint");
+          g.drawRect((size.width/(wbtParentnum+1))*tempwbtParent-100, 250, 150, 50);
+          g.drawString(node.name, (size.width/(wbtParentnum+1))*tempwbtParent-35, 275);
+          tempwbtParent--;
+           }
+         } 
+         
+         
+        System.out.println("sdfas3");
+        for(DataNode node:nodes){
+          System.out.println("Noode print");
+          g.drawRect(node.x, node.y, 150, 50);
+          g.drawString(node.name, node.x+15, node.y+25);
+      }
         g.dispose();
         // repaint panel with new modified paint
         repaint();
+    
+        System.out.println(infoFrame.created);
+        System.out.println(created);
+        if(created != infoFrame.created){
+          System.out.println(infoFrame.going);
+          if(infoFrame.going == false){
+            System.out.println("going");
+            gettingInfo();
+            created = infoFrame.created;
+          }
+        }
     }
     
     public void newNode(){}
@@ -201,6 +241,32 @@ public class DragDrawPanel extends JPanel implements MouseListener, ActionListen
     @Override
     public void keyReleased(KeyEvent e) {
         
+    }
+    
+    public void setNodes(ArrayList<DataNode> someNodes){
+     nodes = someNodes;
+     System.out.println(nodes);
+    }
+    
+     private void gettingInfo(){
+      System.out.println("going");
+      nodes.add(new DataNode(300, 300, infoFrame.getName(), infoFrame.getwbtParent()));
+    }
+     
+     public void newTask(){
+      infoFrame.setVisible(true);
+      infoFrame.reset(); 
+     }
+     
+     public void getwbtParent() {
+      wbtParentnum = 0;
+      System.out.println("sdfas4");
+      for(DataNode node : nodes){
+        System.out.println("sdfas7");
+        if (node.wbtParent) {
+          wbtParentnum++;
+      }
+    }
     }
     
 }

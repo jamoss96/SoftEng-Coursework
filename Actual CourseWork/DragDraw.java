@@ -28,6 +28,7 @@ public class DragDraw extends JFrame{
     private boolean ganttBool;
     private boolean wbtBool;
     private ArrayList<DataNode> nodes;
+  
     
     
     public DragDraw(){
@@ -52,6 +53,8 @@ public class DragDraw extends JFrame{
         wbtBut = new JButton("WBT");
         addNewTaskBut = new JButton("Add New Task");
         
+        
+        
         pertBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pertActionPerformed(evt);
@@ -74,6 +77,7 @@ public class DragDraw extends JFrame{
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addNewTaskActionPerformed(evt);
                 System.out.println("addnew");
+                panel.infoFrame.going = true;
             } 
         });
         
@@ -91,6 +95,8 @@ public class DragDraw extends JFrame{
         ganttBut.setBounds(new Rectangle(screenSize.width -500, 50, 95, 25));
         wbtBut.setBounds(new Rectangle(screenSize.width -400, 50, 95, 25));
         addNewTaskBut.setBounds(new Rectangle(50, 50, 150, 25));
+        
+        
         
     }
 
@@ -120,7 +126,10 @@ public class DragDraw extends JFrame{
     } 
     
     private void addNewTaskActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        new NewJFrame(panel.getNodes());
+        panel.newTask();
+        
     } 
+    
+   
     
 }
