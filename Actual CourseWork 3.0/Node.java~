@@ -1,0 +1,22 @@
+Public class Node{
+  
+  private int pertEarlyStart;
+  private int pertDuration;
+  private int pertEarlyFinish;
+  private int pertLateStart;
+  private int pertLateFinish;
+  private int pertSlack;
+  private ArrayList<Node> parents;
+  private ArrayList<Node> children;
+  private int monthStart;
+  private int monthFinish;
+
+  public Node(){
+  
+    
+  
+  
+  }
+  
+  
+}
