@@ -2,8 +2,90 @@ Roles-
 James Kelly - GitMaster, Chief Programmer
 Sanjay Thapa - Chief Programmer, Bug Tester
 
+https://drive.google.com/a/myport.ac.uk/folderview?id=0B17UTfp_Xv0KbGE0RldiajVBY2c&usp=sharing - Google Drive Link with our stuff in it.
+
 
 
 Information for the presentation- 1st Presentation 2nd Dec
 Target market - University students
 
+The Deliverables:
+
+- overview of the project concept target market and platform (Dan) and product overview and technologies (Sanjay)
+
+Target Market
+
+In terms of the target market for the concept, the main purpose of the program is to fill a gap in the market for students. The product aims to create three different charts; the PERT, GANT and WBT charts from common data from a database. The pivotal part of this software is that it must avoid the main deficiencies when it comes to software design; expensive, non-ubiquitous, does not support the planning of real-world projects (main purpose), and is not supporting all of the charts. Furthermore, the product should be of high enough quality that it can be used by final-year university students, therefore the target market for this particular product is students in any year of study, but particularly useful for the latter years of study who use these charts for analysis of work in their projects.
+
+Platform
+
+In terms of the platform on which this product will be compatible with, the initial plans is to make this compatible for just PC and Mac. This is due to the fact that students will be doing major projects on their desktops and it helps their ease of access to the product if they can have it readily available on there. There is room to facilitate compatibility with mobiles and tablets, however at this stage it is important to make sure it fully works with PC and Mac before trying to expand to mobile devices.                
+
+
+Product overview
+
+-	Will be embedded in GUI for better usability.
+-	Will use Java language and Oracle for database as it will be easier to integrate both of them.
+-	Will run on any platform where Java runtime is available (JVM).
+-	Provides wide range of services as it lets you design WBT, PERT chart, Gantt chart as well as table of prerequisites.
+-	Helps to keep track of designs, capture information and produce reports.
+-	Has the ability to re-plan or reschedule projects in case of any sudden changes (unexpected scenario).
+-	Will focus mainly for university students, however few others business firms as well as college students can use this software to a certain degree (extent).
+-	Low cost.
+
+Technologies
+1.	Microsoft Project
+-	Suite of tools for providing efficient project and portfolio management.
+-	Used for creating projects, track tasks and report results.
+-	Includes project work and project teams, schedules and finances.
+-	Help users to set realistic goals for project team and customers by creating schedules, tracking progress, distributing resources, analysing workloads and managing budgets.
+
+2.	Gantt Project 
+-	is a desktop software
+-	free project scheduling and management application for Windows, OSX and Linux
+-	Written in Java
+-	Easy to use
+-	No licence fee
+
+3.	Mind Genius
+-	A software tool that will provide an effective and efficient way to capture, visualise and use the information within your business.
+-	Planning strategies, projects, events, tasks & workload.
+-	Rapidly gather project requirements, risks, constraints & dependencies.
+-	Capture of ideas, information and knowledge to make sure that your project gets the best possible start.
+
+
+- programming languages chosen - James and bryan
+
+- Table of responsibilities - Nicolas
+
+- Diagrams (meet up)
+
+
+-Programming Languages Chosen -
+For our programming language we have chosen to use the java programming language. The reasons why we chose to use java
+over all other programming are that it has excellent cross platform capabilities, you will not have to reprogram your 
+program for each OS, It also has vast amounts of 3rd party libraries as well as documentation which 
+both make life as the programmer a lot easier.
+
+File/Database Systems Chosen - 
+For our file/database system we have chosen to use oracle database. The reasons for this are that with us using java 
+to make our program it makes it really easy to integrate our database data into our java program and then do stuff 
+with data which wouldn't be as easy if we used other systems.
+  
+- Graphic System ( SWING ) - BRY BRY
+To ensure that the chart rendering software functions across all different type of platforms and operating system, we 
+have decided to use “SWING” graphic system. Unlike AWT, SWING is a GUI system that utilize AWT and produce images in 
+the form of buttons, textboxes, labels and such that responds to events like mouse clicking, data entry, while AWT uses the operating system native GUI toolkit for its 
+functionality.Due to this, AWT programs in one machine might not look and function the same on a different machine 
+unless heavy effort is. put into making AWT programs work consistently across platforms. 
+Even though SWING may take up slightly more memory space compared to AWT, we ultimately want a graphic system that all
+the team members have had experience using and can function consistently across platforms, saving team member’s extra 
+precious time and effort needed to debug the inconsistencies, keeping in track with already planned schedule.
+
+For our graphics system we have chosen to use a combination of swing, AWT and java 2d to create Graphical user 
+inerface's(GUI's) and graphs. The GUI side of our program, where our users will enter the information to be put onto 
+their graphs, will be created using swing. Swing is an extension of the Abstract Window Toolkit(AWT) which allow us to
+create GUI's which are independant of a specific operation systems windowing system meaning they will look the same 
+for every operating system. For to make the graphs we will be using the Java 2D API. The Java 2D API provides 2D 
+graphics capabilities for java programs through extensions to AWT. Throught the combination of swing and Java 2D we 
+can easily create windows and using the window
