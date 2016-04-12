@@ -50,6 +50,8 @@ public class DragDrawPanel extends JPanel implements  ActionListener{
     private int created;
     private int wbtParentnum;
     private int tempwbtParent;
+    private int wbtChildrennum;
+    private int tempwbtChildren;
     public String name;
     public boolean pertBool;
     public boolean ganttBool;
@@ -102,11 +104,14 @@ public class DragDrawPanel extends JPanel implements  ActionListener{
           
           getwbtParent();
           
+          
+          
         
        
           tempwbtParent = wbtParentnum;
           Collections.reverse(nodes);
         
+          //print wbt parents
          for(DataNode node:nodes){
            if (node.wbtParent) {
            
@@ -121,17 +126,22 @@ public class DragDrawPanel extends JPanel implements  ActionListener{
          } 
          
          Collections.reverse(nodes);
-
+         
+         //print no wbtParents
         for(DataNode node1:nodes){
-          if(!node1.wbtParent){
-          
+          if(node1.wbtParent){
+          getwbtChildren(node1);
+          tempwbtChildren = wbtChildrennum;
             for(DataNode node2:nodes){
-              if(node1.wbtParentNode == node2){
-                node1.x = node2.x;
-                node1.y = node2.y + 100;
-                g.drawRect(node1.x, node1.y, 150, 50);
-                g.drawString(node1.name, node1.x + 65, node1.y + 25);
-                g.drawLine(node2.x +75, node2.y + 50, node1.x + 75, node1.y);
+              if(node2.wbtParentNode == node1){
+                
+                
+                node2.x = ((node1.x - ((150*wbtChildrennum)/2)) + (150 * tempwbtChildren))-75 ;
+                node2.y = node1.y + 100;
+                g.drawRect(node2.x, node2.y, 150, 50);
+                g.drawString(node2.name, node2.x + 65, node2.y + 25);
+                g.drawLine(node1.x +75, node1.y + 50, node2.x + 75, node2.y);
+                tempwbtChildren--;
               }
             }
           }
@@ -186,6 +196,16 @@ public class DragDrawPanel extends JPanel implements  ActionListener{
           wbtParentnum++;
         }
       }
+    }
+     
+     public void getwbtChildren(DataNode node1) {
+      wbtChildrennum = 0;
+        for(DataNode node2 : nodes){
+        if (node2.wbtParentNode == node1) {
+          wbtChildrennum++;
+        }
+        }
+      
     }
      
        @Override

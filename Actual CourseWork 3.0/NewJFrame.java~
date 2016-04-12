@@ -132,17 +132,36 @@ public class NewJFrame extends javax.swing.JFrame {
     }
     
     private void confirmButActionPerformed(java.awt.event.ActionEvent evt){
+      System.out.println(!parentList.isSelectionEmpty());
+      System.out.println(jCheckBox1.isSelected());
+      if(parentList.isSelectionEmpty() && jCheckBox1.isSelected()){
       if(!jCheckBox1.isSelected()){
-        tempNodes.add(new DataNode(300, 300, getName(), true));
+        tempNodes.add(new DataNode(300, 300, getName(), getwbtParent(),  nameMatch((String) parentList.getSelectedValue())));
+                      System.out.println(parentList.getSelectedValue());
       }
      else{
-           tempNodes.add(new DataNode(300, 300, getName(), false, nameMatch((String) parentList.getSelectedValue())));
-           System.out.println(nameMatch((String) parentList.getSelectedValue()));
+           tempNodes.add(new DataNode(300, 300, getName(), getwbtParent()));
+           System.out.println(parentList.getSelectedValue());
           }
       
          System.out.println(nodes);
          setVisible(false);
       }
+      else if(!parentList.isSelectionEmpty() && !jCheckBox1.isSelected()){
+        if(!jCheckBox1.isSelected()){
+        tempNodes.add(new DataNode(300, 300, getName(), getwbtParent(),  nameMatch((String) parentList.getSelectedValue())));
+                      System.out.println(parentList.getSelectedValue());
+      }
+     else{
+           tempNodes.add(new DataNode(300, 300, getName(), getwbtParent()));
+           System.out.println(parentList.getSelectedValue());
+          }
+      
+         System.out.println(nodes);
+         setVisible(false);
+      }
+      
+    }
     
     public DataNode nameMatch(String name){
       for(DataNode node:nodes){

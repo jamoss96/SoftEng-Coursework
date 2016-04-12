@@ -34,11 +34,12 @@ import javax.swing.JFrame;
 import java.awt.event.*;
 
 
+
 /**
  *
  * @author up728335
  */
-public class DragDrawPanel extends JPanel implements  ActionListener{
+public class DragDrawPanel extends JPanel implements  ActionListener, MouseListener{
     
     private boolean go = false;
     private int xpos, ypos, oldx, oldy;
@@ -46,6 +47,7 @@ public class DragDrawPanel extends JPanel implements  ActionListener{
     private BufferedImage paintImage;
     public Dimension size;
     public ArrayList<DataNode> nodes;
+    private ArrayList<DataNode> revNodes;
     public NewJFrame infoFrame;
     private int created;
     private int wbtParentnum;
@@ -56,7 +58,11 @@ public class DragDrawPanel extends JPanel implements  ActionListener{
     public boolean pertBool;
     public boolean ganttBool;
     public boolean wbtBool;
+    private boolean collide = false;
     private DataNode tempNode;
+    private DataNode activeNode;
+    private Point mouseStartPos;
+    
     
     
     public DragDrawPanel(Dimension screenSize){
@@ -65,6 +71,7 @@ public class DragDrawPanel extends JPanel implements  ActionListener{
         System.out.println(nodes);
         paintImage = new BufferedImage(screenSize.width, screenSize.height, BufferedImage.TYPE_3BYTE_BGR);
         size = screenSize;
+        addMouseListener(this);
         clear();
         infoFrame = new NewJFrame(nodes);
         infoFrame.setVisible(false);
@@ -78,7 +85,7 @@ public class DragDrawPanel extends JPanel implements  ActionListener{
         });
         
         name = "unnamed";
-        Timer time = new Timer(1000, this);
+        Timer time = new Timer(50, this);
         time.start();
         repaint();
         
@@ -100,26 +107,16 @@ public class DragDrawPanel extends JPanel implements  ActionListener{
           g.drawRect(size.width/2-100, 100, 150, 50);
           g.drawString(name, size.width/2-25, 125);
           
-          
-          
-          getwbtParent();
-          
-          
-          
-        
-       
-          tempwbtParent = wbtParentnum;
           Collections.reverse(nodes);
         
-          //print wbt parents
+          //print all other nodes
          for(DataNode node:nodes){
            if (node.wbtParent) {
            
-           node.x = (size.width/(wbtParentnum+1))*tempwbtParent-100;
-          node.y = 250;
-          g.drawRect(node.x, node.y, 150, 50);
-          g.drawString(node.name, node.x + 65, node.y + 25);
-          g.drawLine(size.width/2-25, 150, node.x + 75, 250);
+          
+          g.drawRect(node.x-75, node.y-25, 150, 50);
+          g.drawString(node.name, node.x -10, node.y);
+          g.drawLine(size.width/2-25, 150, node.x, node.y -25);
           
           tempwbtParent--;
            }
@@ -130,18 +127,11 @@ public class DragDrawPanel extends JPanel implements  ActionListener{
          //print no wbtParents
         for(DataNode node1:nodes){
           if(node1.wbtParent){
-          getwbtChildren(node1);
-          tempwbtChildren = wbtChildrennum;
             for(DataNode node2:nodes){
               if(node2.wbtParentNode == node1){
-                
-                
-                node2.x = ((node1.x - ((150*wbtChildrennum)/2)) + (150 * tempwbtChildren))-75 ;
-                node2.y = node1.y + 100;
-                g.drawRect(node2.x, node2.y, 150, 50);
-                g.drawString(node2.name, node2.x + 65, node2.y + 25);
-                g.drawLine(node1.x +75, node1.y + 50, node2.x + 75, node2.y);
-                tempwbtChildren--;
+                g.drawRect(node2.x - 75, node2.y - 25, 150, 50);
+                g.drawString(node2.name, node2.x -10, node2.y );
+                g.drawLine(node1.x, node1.y +25, node2.x, node2.y);
               }
             }
           }
@@ -208,6 +198,11 @@ public class DragDrawPanel extends JPanel implements  ActionListener{
       
     }
      
+     public boolean checkCollision(Point point, DataNode node){
+       if(point.x >= node.x-75 && point.x <= node.x+75 && point.y-45 >= node.y-25 && point.y-45 <= node.x+25){return true;}
+       else{return false;}
+     }
+     
        @Override
     public void actionPerformed(ActionEvent e) {
       updatePaint();
@@ -221,6 +216,33 @@ public class DragDrawPanel extends JPanel implements  ActionListener{
       }
       
     }
+       
+       @Override
+       public void mousePressed(MouseEvent e){
+         collide = false;
+         mouseStartPos = MouseInfo.getPointerInfo().getLocation();
+         for(DataNode node : nodes){
+           if(checkCollision(mouseStartPos, node)){
+             activeNode = node;
+             collide = true;
+             System.out.println("_");
+             System.out.println("collide");
+           }
+         }
+         if(collide == false){activeNode = null;}
+       }
+       
+       
+       
+       public void mouseReleased(MouseEvent e){
+         if(activeNode != null){
+           activeNode.x = MouseInfo.getPointerInfo().getLocation().x;
+           activeNode.y = MouseInfo.getPointerInfo().getLocation().y-45;
+         }
+       }
+       public void mouseClicked(MouseEvent e){}
+       public void mouseEntered(MouseEvent e){}
+       public void mouseExited(MouseEvent e){}
     
 }
 
