@@ -21,6 +21,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.IIOException;
@@ -29,41 +30,57 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import java.awt.event.*;
 
 
 /**
  *
  * @author up728335
  */
-public class DragDrawPanel extends JPanel implements MouseListener, ActionListener, MouseMotionListener, KeyListener{
+public class DragDrawPanel extends JPanel implements  ActionListener{
     
     private boolean go = false;
     private int xpos, ypos, oldx, oldy;
     private MouseEvent dave;
     private BufferedImage paintImage;
-    private Color david = Color.black;
     public Dimension size;
     public ArrayList<DataNode> nodes;
-    private DataNode ken;
-    private DataNode ken2;
     public NewJFrame infoFrame;
     private int created;
     private int wbtParentnum;
     private int tempwbtParent;
+    private int wbtChildrennum;
+    private int tempwbtChildren;
+    public String name;
+    public boolean pertBool;
+    public boolean ganttBool;
+    public boolean wbtBool;
+    private DataNode tempNode;
+    
     
     public DragDrawPanel(Dimension screenSize){
-        Timer time = new Timer(5, this);
-        time.start();
+        
         nodes = new ArrayList<DataNode>();
-        ken = new DataNode(560, 300, "Dave", false);
-        ken2 = new DataNode(560, 300, "Ken", true);
-        nodes.add(ken);
-        nodes.add(ken2);
         System.out.println(nodes);
         paintImage = new BufferedImage(screenSize.width, screenSize.height, BufferedImage.TYPE_3BYTE_BGR);
         size = screenSize;
         clear();
         infoFrame = new NewJFrame(nodes);
+        infoFrame.setVisible(false);
+        infoFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        infoFrame.addWindowListener( new WindowAdapter()
+                                      {
+          public void windowClosing(WindowEvent e)
+          {
+            infoFrame.setVisible(false);
+          }
+        });
+        
+        name = "unnamed";
+        Timer time = new Timer(1000, this);
+        time.start();
+        repaint();
         
         
     }
@@ -71,61 +88,76 @@ public class DragDrawPanel extends JPanel implements MouseListener, ActionListen
     @Override
     public void paintComponent(Graphics g) {
             g.drawImage(paintImage, 0, 0, null);
-            g.setFont(new Font("TimesRoman", Font.PLAIN, 12));
-            g.drawString("Press left mouse Button to paint, right to clear and middle to save to file", 0, 12);
     }
     
     public void updatePaint(){
         Graphics g = paintImage.createGraphics();
+        clear();
+        g.setColor(Color.black);
         
-        g.setColor(david);
-        
-        oldx = xpos;
-        oldy = ypos;
-        
-        for(DataNode node:nodes){
-          g.drawRect(node.x, node.y, 100, 25);
-          g.drawString(node.name, node.x+25, node.y+25);
-      }
-       getwbtParent();
-        System.out.println(wbtParentnum);
+        if(wbtBool){
+          // draw start node
+          g.drawRect(size.width/2-100, 100, 150, 50);
+          g.drawString(name, size.width/2-25, 125);
+          
+          
+          
+          getwbtParent();
+          
+          
+          
         
        
-        tempwbtParent = wbtParentnum;
+          tempwbtParent = wbtParentnum;
+          Collections.reverse(nodes);
         
+          //print wbt parents
          for(DataNode node:nodes){
            if (node.wbtParent) {
-           System.out.println("wbtPrint");
-          g.drawRect((size.width/(wbtParentnum+1))*tempwbtParent-100, 250, 150, 50);
-          g.drawString(node.name, (size.width/(wbtParentnum+1))*tempwbtParent-35, 275);
+           
+           node.x = (size.width/(wbtParentnum+1))*tempwbtParent-100;
+          node.y = 250;
+          g.drawRect(node.x, node.y, 150, 50);
+          g.drawString(node.name, node.x + 65, node.y + 25);
+          g.drawLine(size.width/2-25, 150, node.x + 75, 250);
+          
           tempwbtParent--;
            }
          } 
          
+         Collections.reverse(nodes);
          
-        System.out.println("sdfas3");
-        for(DataNode node:nodes){
-          System.out.println("Noode print");
-          g.drawRect(node.x, node.y, 150, 50);
-          g.drawString(node.name, node.x+15, node.y+25);
+         //print no wbtParents
+        for(DataNode node1:nodes){
+          if(node1.wbtParent){
+          getwbtChildren(node1);
+          tempwbtChildren = wbtChildrennum;
+            for(DataNode node2:nodes){
+              if(node2.wbtParentNode == node1){
+                
+                
+                node2.x = ((node1.x - ((150*wbtChildrennum)/2)) + (150 * tempwbtChildren))-75 ;
+                node2.y = node1.y + 100;
+                g.drawRect(node2.x, node2.y, 150, 50);
+                g.drawString(node2.name, node2.x + 65, node2.y + 25);
+                g.drawLine(node1.x +75, node1.y + 50, node2.x + 75, node2.y);
+                tempwbtChildren--;
+              }
+            }
+          }
       }
+        
+
+        
         g.dispose();
         // repaint panel with new modified paint
         repaint();
     
-        System.out.println(infoFrame.created);
-        System.out.println(created);
-        if(created != infoFrame.created){
-          System.out.println(infoFrame.going);
-          if(infoFrame.going == false){
-            System.out.println("going");
-            gettingInfo();
-            created = infoFrame.created;
-          }
-        }
-    }
+        
+       }
     
-    public void newNode(){}
+    
+    }
     
     public void clear(){
         Graphics g = paintImage.createGraphics();
@@ -138,135 +170,56 @@ public class DragDrawPanel extends JPanel implements MouseListener, ActionListen
         repaint();
         
     }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        if(e.getButton() == 3 ){clear();}
-        
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        if(e.getButton() == 1){
-        go = true;
-        dave = e;
-        }
-         if(e.getButton() == 3 ){clear();}
-         if(e.getButton() == 2 ){
-             try {
-             save();
-            } catch (IOException ex) {
-                Logger.getLogger(DragDrawPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        go = false;
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(go){
-        try{
-            
-        xpos = MouseInfo.getPointerInfo().getLocation().x - 10;
-        ypos = MouseInfo.getPointerInfo().getLocation().y - 30;
-        updatePaint();
-            
-        }
-        catch(NullPointerException en){
-        }
-        
-        
-    }
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        xpos = MouseInfo.getPointerInfo().getLocation().x - 10;
-        ypos = MouseInfo.getPointerInfo().getLocation().y - 30;
-        updatePaint();
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        xpos = MouseInfo.getPointerInfo().getLocation().x - 10;
-        ypos = MouseInfo.getPointerInfo().getLocation().y - 30;
-        updatePaint();
-    }
     
-    public void save() throws IOException{
-        File aFile = new File("images/image.png");
-        aFile = getFile(aFile, 0);
-        ImageIO.write(paintImage, "PNG", aFile);
-    }
-    
-    private File getFile(File file,int num){
-        
-        if(file.exists()){return getFile(new File("images/image" + num + ".png"), num+1);}
-        else{return file;}
-        
-    }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        
-    }
     
     public ArrayList<DataNode> getNodes() {System.out.println(nodes); return nodes;}
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_R){david = Color.RED;}
-        else if(e.getKeyCode() == KeyEvent.VK_B){david = Color.BLACK;}
-        else if(e.getKeyCode() == KeyEvent.VK_G){david = Color.GREEN;}
-        else if(e.getKeyCode() == KeyEvent.VK_P){david = Color.PINK;}
-        else if(e.getKeyCode() == KeyEvent.VK_O){david = Color.ORANGE;}
-        else if(e.getKeyCode() == KeyEvent.VK_M){david = Color.MAGENTA;}
-        else if(e.getKeyCode() == KeyEvent.VK_L){david = Color.BLUE;}
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        
-    }
     
     public void setNodes(ArrayList<DataNode> someNodes){
      nodes = someNodes;
      System.out.println(nodes);
     }
     
-     private void gettingInfo(){
-      System.out.println("going");
-      nodes.add(new DataNode(300, 300, infoFrame.getName(), infoFrame.getwbtParent()));
-    }
+     
      
      public void newTask(){
       infoFrame.setVisible(true);
-      infoFrame.reset(); 
+      infoFrame.reset();
+      infoFrame.getNodes(nodes);
+      infoFrame.setModel();
      }
      
      public void getwbtParent() {
       wbtParentnum = 0;
-      System.out.println("sdfas4");
       for(DataNode node : nodes){
-        System.out.println("sdfas7");
         if (node.wbtParent) {
           wbtParentnum++;
+        }
       }
     }
+     
+     public void getwbtChildren(DataNode node1) {
+      wbtChildrennum = 0;
+        for(DataNode node2 : nodes){
+        if (node2.wbtParentNode == node1) {
+          wbtChildrennum++;
+        }
+        }
+      
+    }
+     
+       @Override
+    public void actionPerformed(ActionEvent e) {
+      updatePaint();
+      if(!infoFrame.getNewNodes().isEmpty()){
+       
+        for(DataNode newNode : infoFrame.getNewNodes()){
+        nodes.add(newNode);
+      }
+        infoFrame.resetNodes();
+        
+      }
+      
     }
     
 }

@@ -10,6 +10,7 @@ public class DataNode{
   private int pertSlack;
   private ArrayList<DataNode> parents;
   private ArrayList<DataNode> children;
+  public DataNode wbtParentNode;
   private int monthStart;
   private int monthFinish;
   public int x;
@@ -22,6 +23,17 @@ public class DataNode{
     this.y = y;
     this.name = name;
     this.wbtParent = wbtParent;
+    
+  
+  
+  }
+  
+  public DataNode(int x, int y, String name, Boolean wbtParent, DataNode wbtParentNode){
+    this.x = x;
+    this.y = y;
+    this.name = name;
+    this.wbtParent = wbtParent;
+    this.wbtParentNode = wbtParentNode;
     
   
   

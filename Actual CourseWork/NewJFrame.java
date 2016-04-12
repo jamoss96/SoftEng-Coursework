@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import javax.swing.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,12 +18,18 @@ public class NewJFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public ArrayList<DataNode> nodes;
+    public ArrayList<DataNode> tempNodes;
     private ArrayList<String> names;
     public Boolean going = true;
     public int created = 0;
+    private DefaultListModel model;
+    private DefaultListModel emptyModel;
     
     public NewJFrame(ArrayList<DataNode> nodes) {
         names = new ArrayList<String>();
+        model = new DefaultListModel();
+        tempNodes = new ArrayList<DataNode>();
+        emptyModel = new DefaultListModel();
         this.nodes = nodes;
         init();
         initComponents();
@@ -43,10 +50,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        parentList = new javax.swing.JList(names.toArray());
+        parentList = new javax.swing.JList(model);
         confirmBut = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        parentList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,10 +67,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        parentList.setModel(new javax.swing.AbstractListModel() {
-            public int getSize() { return names.size(); }
-            public String getElementAt(int i) { return names.get(i); }
-        });
+        parentList.setModel(model);
         jScrollPane1.setViewportView(parentList);
         
         confirmBut.setText("Confirm");
@@ -122,33 +127,89 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
+      if(jCheckBox1.isSelected()){parentList.setModel(emptyModel); }
+      else{parentList.setModel(model);}
     }
     
     private void confirmButActionPerformed(java.awt.event.ActionEvent evt){
-      going = false;
-      setVisible(false);
-      created++;
-      System.out.println(created);
+      System.out.println(!parentList.isSelectionEmpty());
+      System.out.println(jCheckBox1.isSelected());
+      if(parentList.isSelectionEmpty() && jCheckBox1.isSelected()){
+      if(!jCheckBox1.isSelected()){
+        tempNodes.add(new DataNode(300, 300, getName(), getwbtParent(),  nameMatch((String) parentList.getSelectedValue())));
+                      System.out.println(parentList.getSelectedValue());
+      }
+     else{
+           tempNodes.add(new DataNode(300, 300, getName(), getwbtParent()));
+           System.out.println(parentList.getSelectedValue());
+          }
+      
+         System.out.println(nodes);
+         setVisible(false);
+      }
+      else if(!parentList.isSelectionEmpty() && !jCheckBox1.isSelected()){
+        if(!jCheckBox1.isSelected()){
+        tempNodes.add(new DataNode(300, 300, getName(), getwbtParent(),  nameMatch((String) parentList.getSelectedValue())));
+                      System.out.println(parentList.getSelectedValue());
+      }
+     else{
+           tempNodes.add(new DataNode(300, 300, getName(), getwbtParent()));
+           System.out.println(parentList.getSelectedValue());
+          }
+      
+         System.out.println(nodes);
+         setVisible(false);
+      }
+      
     }
     
-    private void getNodes(ArrayList<DataNode> nodes){
+    public DataNode nameMatch(String name){
+      for(DataNode node:nodes){
+          if(node.name.equals(name)){
+            return node;
+          }
+      }
+      return null;
+    }
+      
+    public void resetNodes(){
+      tempNodes.clear();
+    }
+
+      
+    
+    
+    public void getNodes(ArrayList<DataNode> nodes){
      this.nodes = nodes; 
     }
     
     public void reset(){
       jCheckBox1.setSelected(false);
       jTextField1.setText("");
+      parentList.setModel(model);
+      model.clear();
     }
-
-  
     
+    public void setModel(){
+      if(!nodes.isEmpty()){
+      for(DataNode node : nodes){
+       model.addElement(node.name);
+        
+      }
+    }
+    }
+    
+
     
     public void init(){
         setVisible(true);
       for(DataNode node:nodes){
           names.add(node.name);
       }   
+    }
+    
+    public ArrayList<DataNode> getNewNodes(){
+      return tempNodes;
     }
     
     public String getName(){return jTextField1.getText();}
@@ -161,6 +222,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JList parentList;
+    public javax.swing.JList parentList;
     // End of variables declaration                   
 }
