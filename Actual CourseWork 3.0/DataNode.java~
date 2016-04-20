@@ -2,29 +2,61 @@ import java.util.ArrayList;
 
 public class DataNode{
   
-  private int pertEarlyStart;
-  private int pertDuration;
-  private int pertEarlyFinish;
-  private int pertLateStart;
-  private int pertLateFinish;
-  private int pertSlack;
-  private ArrayList<DataNode> parents;
-  private ArrayList<DataNode> children;
+  public int pertEarlyStart;
+  public int pertDuration;
+  public int pertEarlyFinish;
+  public int pertLateStart;
+  public int pertLateFinish;
+  public int pertSlack;
+  public ArrayList<DataNode> parents;
+  public ArrayList<DataNode> children;
+  public DataNode wbtParentNode;
   private int monthStart;
   private int monthFinish;
   public int x;
   public int y;
+  public int pertX;
+  public int pertY;
   public String name;
   public Boolean wbtParent;
+  
 
   public DataNode(int x, int y, String name, Boolean wbtParent){
     this.x = x;
     this.y = y;
     this.name = name;
     this.wbtParent = wbtParent;
+    this.pertEarlyStart = 500;
+    this.pertDuration = 500;
+    this.pertEarlyFinish = 500;
+    this.pertX = 500;
+    this.pertY = 500;
     
   
   
+  }
+  
+  public DataNode(int x, int y, String name, Boolean wbtParent, DataNode wbtParentNode){
+    this.x = x;
+    this.y = y;
+    this.name = name;
+    this.wbtParent = wbtParent;
+    this.wbtParentNode = wbtParentNode;
+    
+  
+  
+  }
+  
+  public void pertInit(){
+    if(parents != null){
+      for(DataNode node:parents){
+        if(node.pertEarlyFinish > pertEarlyStart){
+          pertEarlyStart = node.pertEarlyFinish;
+        }
+     }
+      pertEarlyFinish = pertEarlyStart + pertDuration;
+    }
+    
   }
   
   
