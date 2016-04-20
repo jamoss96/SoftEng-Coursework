@@ -70,7 +70,7 @@ public class DragDraw extends JFrame{
         wbtBut = new JButton("WBT");
         addNewTaskBut = new JButton("Add New Task");
         exitBut = new JButton("Exit");
-        System.out.println("after buttons");
+
         
         pertBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

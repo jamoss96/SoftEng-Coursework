@@ -219,7 +219,7 @@ public class NewJFrame extends javax.swing.JFrame {
       } catch (NumberFormatException e) {
          textint = false;
       }
-      System.out.println((!nameTextField.getText().equals("") && !parentList.isSelectionEmpty() && ((pertCheck.isSelected() && !pertDurationTextField.getText().equals("") && textint &&  !pertList.isSelectionEmpty()) || !pertCheck.isSelected()) ));
+      
       if(!nameTextField.getText().equals("") && !parentList.isSelectionEmpty() && ((pertCheck.isSelected() && !pertDurationTextField.getText().equals("") && textint &&  !pertList.isSelectionEmpty()) || !pertCheck.isSelected()) ){
        
         DataNode tempNode = new DataNode(nameTextField.getText());

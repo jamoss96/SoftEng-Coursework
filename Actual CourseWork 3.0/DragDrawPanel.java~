@@ -68,6 +68,8 @@ public class DragDrawPanel extends JPanel implements  ActionListener, MouseListe
     public DragDrawPanel(Dimension screenSize){
         
         nodes = new ArrayList<DataNode>();
+        DataNode startNode = new DataNode("Start Node");
+        
         System.out.println(nodes);
         paintImage = new BufferedImage(screenSize.width, screenSize.height, BufferedImage.TYPE_3BYTE_BGR);
         size = screenSize;
@@ -87,6 +89,18 @@ public class DragDrawPanel extends JPanel implements  ActionListener, MouseListe
         name = "unnamed";
         Timer time = new Timer(50, this);
         time.start();
+        
+        startNode.x = screenSize.width/2;
+        startNode.y = 100;
+        startNode.pertX = 500;
+        startNode.pertY = screenSize.height/2;
+        startNode.pertEarlyStart = 0;
+        startNode.pertDuration = 0;
+        startNode.pertLateStart = 0;
+        startNode.pertSel = true;
+        nodes.add(startNode);
+        
+        
         repaint();
         
         
@@ -103,39 +117,21 @@ public class DragDrawPanel extends JPanel implements  ActionListener, MouseListe
         g.setColor(Color.black);
         
         if(wbtBool){
-          // draw start node
-          g.drawRect(size.width/2-100, 100, 150, 50);
-          g.drawString(name, size.width/2-25, 125);
-          
-          Collections.reverse(nodes);
-        
-          //print all other nodes
-         for(DataNode node:nodes){
-           if (node.wbtParent) {
-           
-          
-          g.drawRect(node.x-75, node.y-25, 150, 50);
-          g.drawString(node.name, node.x -10, node.y);
-          g.drawLine(size.width/2-25, 150, node.x, node.y -25);
-          
-          tempwbtParent--;
-           }
-         } 
-         
-         Collections.reverse(nodes);
+
          
          //print no wbtParents
         for(DataNode node1:nodes){
-          if(node1.wbtParent){
-            for(DataNode node2:nodes){
-              if(node2.wbtParentNode == node1){
-                g.drawRect(node2.x - 75, node2.y - 25, 150, 50);
-                g.drawString(node2.name, node2.x -10, node2.y );
-                g.drawLine(node1.x, node1.y +25, node2.x, node2.y);
-              }
-            }
+
+              
+                g.drawRect(node1.x - 75, node1.y - 25, 150, 50);
+                g.drawString(node1.name, node1.x -10, node1.y );
+                if(node1.wbtParentNode != null){
+                g.drawLine(node1.wbtParentNode.x, node1.wbtParentNode.y +25, node1.x, node1.y - 25);
+                }
+              
+            
           }
-      }
+      
         
 
         
@@ -149,6 +145,7 @@ public class DragDrawPanel extends JPanel implements  ActionListener, MouseListe
           
           for(DataNode node:nodes){
            
+          if(node.pertSel){
           g.drawRect(node.pertX-75, node.pertY-50, 150, 100);
           g.drawRect(node.pertX-75, node.pertY-50, 50, 25);
           g.drawRect(node.pertX-25, node.pertY-50, 50, 25);
@@ -161,13 +158,16 @@ public class DragDrawPanel extends JPanel implements  ActionListener, MouseListe
           g.drawString(new Integer(node.pertEarlyStart).toString(), node.pertX -65, node.pertY-40);
           g.drawString(new Integer(node.pertDuration).toString(), node.pertX -15, node.pertY-40);
           g.drawString(new Integer(node.pertEarlyFinish).toString(), node.pertX +35, node.pertY-40);
-          
-         // for(DataNode parent:node.parents){
-         //   g.drawLine(parent.pertX, parent.pertY + 50, node.pertX, node.pertY -25);
-         // }
-          
+          if(node.parents != null){
+            for(DataNode parent:node.parents){
+              g.drawLine(parent.pertX + 75, parent.pertY, node.pertX- 75, node.pertY );
+            }
+          }
+            }
            
          }
+          g.dispose();
+          repaint();
           
         }
     
@@ -202,6 +202,7 @@ public class DragDrawPanel extends JPanel implements  ActionListener, MouseListe
       infoFrame.reset();
       infoFrame.getNodes(nodes);
       infoFrame.setModel();
+      infoFrame.setPertModel();
      }
      
      public void getwbtParent() {
@@ -224,8 +225,15 @@ public class DragDrawPanel extends JPanel implements  ActionListener, MouseListe
     }
      
      public boolean checkCollision(Point point, DataNode node){
-       if(point.x >= node.x-75 && point.x <= node.x+75 && point.y-45 >= node.y-25 && point.y-45 <= node.x+25){return true;}
+       if(wbtBool){
+       if(point.x >= node.x-75 && point.x <= node.x+75 && point.y-45 >= node.y-25 && point.y-45 <= node.y+25){return true;}
        else{return false;}
+       }
+       else if(pertBool){
+       if(point.x >= node.pertX-75 && point.x <= node.pertX+75 && point.y-45 >= node.pertY-50 && point.y-45 <= node.pertY+50){return true;}
+       else{return false;}
+       }
+       return false;
      }
      
        @Override
@@ -250,9 +258,9 @@ public class DragDrawPanel extends JPanel implements  ActionListener, MouseListe
            if(checkCollision(mouseStartPos, node)){
              activeNode = node;
              collide = true;
-             System.out.println("_");
              System.out.println("collide");
            }
+           else{System.out.println(mouseStartPos);}
          }
          if(collide == false){activeNode = null;}
        }
@@ -260,9 +268,16 @@ public class DragDrawPanel extends JPanel implements  ActionListener, MouseListe
        
        
        public void mouseReleased(MouseEvent e){
+         
          if(activeNode != null){
+           if(wbtBool){
            activeNode.x = MouseInfo.getPointerInfo().getLocation().x;
            activeNode.y = MouseInfo.getPointerInfo().getLocation().y-45;
+           }
+           if(pertBool){
+           activeNode.pertX = MouseInfo.getPointerInfo().getLocation().x;
+           activeNode.pertY = MouseInfo.getPointerInfo().getLocation().y-45;
+           }
          }
        }
        public void mouseClicked(MouseEvent e){}

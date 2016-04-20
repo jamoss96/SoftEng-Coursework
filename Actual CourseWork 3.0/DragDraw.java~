@@ -31,6 +31,7 @@ public class DragDraw extends JFrame{
     public JButton ganttBut;
     public JButton wbtBut;
     public JButton addNewTaskBut;
+    public JButton exitBut;
     
     private File loadFile;
     private File saveFile;
@@ -56,6 +57,8 @@ public class DragDraw extends JFrame{
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
+
         
    
         panel = new DragDrawPanel(screenSize);
@@ -66,6 +69,7 @@ public class DragDraw extends JFrame{
         ganttBut = new JButton("Gantt");
         wbtBut = new JButton("WBT");
         addNewTaskBut = new JButton("Add New Task");
+        exitBut = new JButton("Exit");
         System.out.println("after buttons");
         
         pertBut.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +90,12 @@ public class DragDraw extends JFrame{
             } 
         });
         
+        exitBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            } 
+        });
+        
         addNewTaskBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addNewTaskActionPerformed(evt);
@@ -101,6 +111,7 @@ public class DragDraw extends JFrame{
         panel.add(ganttBut);
         panel.add(wbtBut);
         panel.add(addNewTaskBut);
+        panel.add(exitBut);
         panel.setLayout(null);
         requestFocus();
         panel.repaint();
@@ -137,6 +148,7 @@ public class DragDraw extends JFrame{
         ganttBut.setBounds(new Rectangle(screenSize.width -500, 50, 95, 25));
         wbtBut.setBounds(new Rectangle(screenSize.width -400, 50, 95, 25));
         addNewTaskBut.setBounds(new Rectangle(50, 50, 150, 25));
+        exitBut.setBounds(new Rectangle(screenSize.width - 200, 50, 150, 50));
         setVisible(true);
         panel.repaint();
         
@@ -174,6 +186,11 @@ public class DragDraw extends JFrame{
         panel.newTask();
         
     } 
+    
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        System.exit(0);
+        
+    }
     
      private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
         JFileChooser loader = new JFileChooser(){

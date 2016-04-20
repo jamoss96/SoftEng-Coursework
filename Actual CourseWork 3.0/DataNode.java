@@ -27,7 +27,8 @@ public class DataNode{
     this.pertEarlyStart = 0;
     this.pertDuration = 0;
     this.pertEarlyFinish = 0;
-    this.pertX = 500;
+    this.pertLateFinish = 0;
+    this.pertX = 100;
     this.pertY = 500;
     pertInit();
   
@@ -53,7 +54,10 @@ public class DataNode{
       for(DataNode node:parents){
         if(node.pertEarlyFinish > pertEarlyStart){
           pertEarlyStart = node.pertEarlyFinish;
+          
         }
+        pertX = node.pertX + 250;
+        pertY = node.pertY;
      }
       pertEarlyFinish = pertEarlyStart + pertDuration;
     }

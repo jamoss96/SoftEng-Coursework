@@ -19,33 +19,34 @@ public class DataNode{
   public int pertY;
   public String name;
   public Boolean wbtParent;
+  public Boolean pertSel;
   
 
-  public DataNode(int x, int y, String name, Boolean wbtParent){
-    this.x = x;
-    this.y = y;
+  public DataNode(String name){
     this.name = name;
-    this.wbtParent = wbtParent;
-    this.pertEarlyStart = 500;
-    this.pertDuration = 500;
-    this.pertEarlyFinish = 500;
+    this.pertEarlyStart = 0;
+    this.pertDuration = 0;
+    this.pertEarlyFinish = 0;
     this.pertX = 500;
     this.pertY = 500;
-    
+    pertInit();
   
   
   }
   
-  public DataNode(int x, int y, String name, Boolean wbtParent, DataNode wbtParentNode){
-    this.x = x;
-    this.y = y;
-    this.name = name;
-    this.wbtParent = wbtParent;
-    this.wbtParentNode = wbtParentNode;
-    
-  
-  
+  public void init(){
+    if(wbtParentNode == null){
+      x = 500;
+      y = 200;
+    }
+    else{
+      x = wbtParentNode.x;
+      y = wbtParentNode.y + 100;
+    }
   }
+  
+  
+ 
   
   public void pertInit(){
     if(parents != null){
